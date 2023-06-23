@@ -20,7 +20,7 @@
 // WHEN all prompts are answered
 // THEN a password is generated that matches the selected criteria
 // WHEN the password is generated
-// THEN the password is either displayed in an alert or written to the page
+// THEN the password is either displayed in an alert or written to the page X
 
 // defining character set for upperCase alpahbet
 const upperCaseAlphabet = [
@@ -98,78 +98,124 @@ function randomNumber(max) {
   return Math.floor(Math.random() * max);
 }
 
-function createArray() {
-  if (hasLowerCase && hasUpperCase && hasSpecialChar && hasNumbers) {
-    return (newArrayOfChar = [
-      ...lowerCaseAlphabet,
-      ...upperCaseAlphabet,
-      ...specialChar,
-      ...numbers,
-    ]);
-  } else if (hasLowerCase && hasUpperCase && hasNumbers) {
-    return (newArrayOfChar = [
-      ...lowerCaseAlphabet,
-      ...upperCaseAlphabet,
-      ...numbers,
-    ]);
-  } else if (hasLowerCase && hasUpperCase && hasSpecialChar) {
-    return (newArrayOfChar = [
-      ...lowerCaseAlphabet,
-      ...upperCaseAlphabet,
-      ...specialChar,
-    ]);
-  } else if (hasLowerCase && hasUpperCase) {
-    return (newArrayOfChar = [...lowerCaseAlphabet, ...upperCaseAlphabet]);
+// This fuction checks user input to verifies user input is a number and that the password length falls within the given range 8 through 128 characters;
+
+function isValid(desiredPasswordLength) {
+  if (parseInt(desiredPasswordLength)) {
+    if (desiredPasswordLength < 8) {
+      window.alert("Password should be at least 8 characters long!");
+      return false;
+    } else if (desiredPasswordLength > 128) {
+      window.alert(
+        "Sorry! Password can have maximum of 128 characters. Try again!"
+      );
+      return false;
+    } else {
+      return true;
+    }
+  } else {
+    window.alert("Please enter a numeric character and try again");
+    return false;
   }
 }
 
+//Function:  Creates a new array to get random character sets using spread operator
+function createArray(hasLowerCase, hasUpperCase, hasSpecialChar, hasNumbers) {
+  let newArrayOfChar = []; //
+  if (hasLowerCase) {
+    newArrayOfChar.push(...lowerCaseAlphabet);
+  }
+  if (hasUpperCase) {
+    newArrayOfChar.push(...upperCaseAlphabet);
+  }
+  if (hasSpecialChar) {
+    newArrayOfChar.push(...specialChar);
+    console.log(`New Array inside special`, newArrayOfChar);
+  }
+  if (hasNumbers) {
+    newArrayOfChar.push(...numbers);
+    console.log(`New Array inside num`, newArrayOfChar);
+  }
+
+  return newArrayOfChar;
+}
+
+// This function creates a temporary password and makes sure that at least one character form each char set is present in the password as per user preference.
+function createTempPassword(
+  hasLowerCase,
+  hasUpperCase,
+  hasSpecialChar,
+  hasNumbers
+) {
+  let tempPassword = [];
+  hasLowerCase
+    ? tempPassword.push(
+        lowerCaseAlphabet[randomNumber(lowerCaseAlphabet.length)]
+      )
+    : "";
+  hasUpperCase
+    ? tempPassword.push(
+        upperCaseAlphabet[randomNumber(upperCaseAlphabet.length)]
+      )
+    : "";
+  hasSpecialChar
+    ? tempPassword.push(specialChar[randomNumber(specialChar.length)])
+    : "";
+  hasNumbers ? tempPassword.push(numbers[randomNumber(numbers.length)]) : "";
+
+  return tempPassword;
+}
+
 let generatePassword = function () {
-  let finalPassword = []; //empty array;
-  let passwordLen = window.prompt("Enter the length of your password."); // passwordLen will save the userInput from the prompt;
-  let hasLowerCase;
-  let hasUpperCase;
-  let hasSpecialChar;
-  let hasNumbers;
-  if (passwordLen < 8) {
-    window.alert("Password should be atleast 8 characters long!");
-    return "";
-  } else if (passwordLen > 128) {
-    window.alert("Sorry! Password can have maximum of 128 characters.");
-    return "";
-  } else {
-    hasLowerCase = window.confirm(
+  let desiredPasswordLength = window.prompt(
+    "Enter the length of your password."
+  ); // passwordLen will save the userInput from the prompt;
+  let randomArray;
+  let tempPassword;
+  if (isValid(desiredPasswordLength)) {
+    let hasLowerCase = window.confirm(
       "Does the password have lowercase characters ?"
     ); // returns a boolean
-    console.log(`haslowercase`, hasLowerCase);
-    hasUpperCase = window.confirm(
+    let hasUpperCase = window.confirm(
       "Does the password have uppercase characters ?"
     );
-    console.log(`hasuppercase`, hasLowerCase); // returns a boolean
-    hasSpecialChar = window.confirm(
+    // returns a boolean
+    let hasSpecialChar = window.confirm(
       "Does the password have special characters ?"
     );
-    console.log(`special`, hasSpecialChar); // returns a boolean
+    // returns a boolean
+    let hasNumbers = window.confirm("Does the password have numbers ?"); // returns a boolean
+    // Calling createArray to get an array created with different characters
+    randomArray = createArray(
+      hasLowerCase,
+      hasUpperCase,
+      hasSpecialChar,
+      hasNumbers
+    );
+    // console.log(`Big Array`, randomArray);
+    // CreateTempArray is called after we get value from the random array.
+    randomArray.length > 0
+      ? (tempPassword = createTempPassword(
+          hasLowerCase,
+          hasUpperCase,
+          hasSpecialChar,
+          hasNumbers
+        ))
+      : window.alert(
+          "Please select at least one alphabet character and/or number and/or special to proceed."
+        );
 
-    hasNumbers = window.confirm("Does the password have numbers ?"); // returns a boolean
-    console.log(`numbers?`, hasNumbers);
-
-    if (hasLowerCase && hasUpperCase && hasSpecialChar && hasNumbers) {
-      let newArrayOfChar = [
-        ...lowerCaseAlphabet,
-        ...upperCaseAlphabet,
-        ...specialChar,
-        ...numbers,
-      ];
-      console.log(newArrayOfChar);
-      for (let i = 0; i < passwordLen; i++) {
-        let randIndex = randomNumber(newArrayOfChar.length);
-        console.log(randIndex);
-        finalPassword.push(newArrayOfChar[randIndex]);
+    // The password finally gets generated below this line
+    if (tempPassword.length > 0) {
+      let remainingChar = desiredPasswordLength - tempPassword.length;
+      console.log(`Remainder length`, remainingChar);
+      for (let i = 0; i < remainingChar; i++) {
+        tempPassword.push(randomArray[randomNumber(randomArray.length)]);
       }
-      console.log(finalPassword);
-      return finalPassword.join("");
+      console.log(`Temp password`, tempPassword);
+      return tempPassword.join("");
     }
-  }
+  } else return "";
 };
 
 // Assignment Code
