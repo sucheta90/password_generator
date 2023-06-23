@@ -2,64 +2,29 @@
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+In our present-day society, digital media and the internet have become integral parts of our lives. We heavily rely on them for various activities such as online shopping, banking, app subscriptions, cryptocurrency transactions, and much more. To ensure the security of these transactions, users heavily depend on passwords, but traditional password choices are no longer sufficient.
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+To address this need, this innovative app has been developed, that generates unconventional passwords tailored to individual preferences. This project aims to provide a reliable solution for those seeking strong passwords, customized according to their desired length and character types.
 
-## Table of Contents (Optional)
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
-
-## Installation
-
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+Embrace the power of advanced password generation and take control of your online security today with our cutting-edge app.
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+By utilizing this app, users can enhance the security of their online presence and safeguard their valuable digital assets. With the convenience of generating unique and unconventional passwords, individuals can confidently engage in various online activities, knowing that their personal information and transactions are well protected.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
-
-## Credits
-
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
-
-## License
-
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
-
----
-
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
+![image](./assets/images/screencapture-127-0-0-1-5501-index-html-2023-06-23-18_37_32.png)
+![image](./assets/images/Screenshot%202023-06-23%20at%206.35.52%20PM.png)
 
 ## Badges
 
 ![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
 
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-
 ## Features
 
-If your project has a lot of features, list them here.
+- This app is mobile responsive.
+- This app can generate passwords of length starting from 8 upto 128 characters.
 
-## How to Contribute
+## Useful Links
 
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-
-## Tests
+- [Github Repo](https://github.com/sucheta90/password_generator)
+- [Live Site](https://sucheta90.github.io/password_generator)
